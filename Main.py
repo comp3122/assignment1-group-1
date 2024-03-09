@@ -1,5 +1,5 @@
 import RPGMap
-
+# comment
 class RPGGame:
     def _init_(self, map_width, map_height):
         self.map = RPGMap(map_width, map_height)
@@ -28,3 +28,6 @@ class RPGGame:
             print("Player wins!")
         else:
             print("Monsters win!")
+
+print("start game")
+# this is above the rpg game
