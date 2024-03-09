@@ -1,39 +1,30 @@
-class Player:
-    def __init__(self, name, age, position):
-        self.name = name
-        self.age = age
-        self.position = position
-        self.stats = []
-        self.team = None
-        self.league = None
-        self.country = None
-        self.club = None
-        self.contract = None
-        self.salary = None
-    
-    def get_stats(self):
-        return self.stats
-    
-    def get_team(self):
-        return self.team
-    
-    def get_league(self):
-        return self.league
-    
-    def get_country(self):
-        return self.country
-    
-    def get_club(self):
-        return self.club
-    
-    def get_contract(self):
-        return self.contract
+import RPGMap
 
-    def get_salary(self):
-        return self.salary
-# """
+class RPGGame:
+    def _init_(self, map_width, map_height):
+        self.map = RPGMap(map_width, map_height)
+        self.player = None
+        self.monsters = []
 
-player = Player('John Doe', 25, 'Forward')
-print(player.name)
-print(player.age)
-print(player.position)
+    def add_player(self, player, x, y):
+        self.player = player
+        self.map.place_character(x, y, 'P')
+
+    def add_monster(self, monster, x, y):
+        self.monsters.append(monster)
+        self.map.place_character(x, y, 'M')
+
+    def run(self):
+        # This is a very basic game loop that just makes the player and monsters attack each other
+        while self.player.is_alive() and any(monster.is_alive() for monster in self.monsters):
+            for monster in self.monsters:
+                if monster.is_alive():
+                    self.player.attack(monster)
+                if monster.is_alive():
+                    monster.attack(self.player)
+            self.map.print_map()
+
+        if self.player.is_alive():
+            print("Player wins!")
+        else:
+            print("Monsters win!")
