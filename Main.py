@@ -31,3 +31,5 @@ class RPGGame:
 
 print("start game")
 # this is above the rpg game
+main()
+# it would be demo to run the program
